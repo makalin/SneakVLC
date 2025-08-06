@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  sneakvlc:
+    build: .
+    ports:
+      - "8080:8080"  # Backend API
+      - "3000:3000"  # Web interface
+      - "12345:12345/udp"  # VLC streaming
+    volumes:
+      - ./received:/app/received
+      - ./tmp:/tmp/sneakvlc
+    environment:
+      - VLC_PORT=12345
+      - SERVER_PORT=8080
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service
+  sneakvlc-dev:
+    build: .
+    ports:
+      - "8081:8080"  # Backend API (dev)
+      - "3001:3000"  # Web interface (dev)
+      - "12346:12345/udp"  # VLC streaming (dev)
+    volumes:
+      - ./received:/app/received
+      - ./tmp:/tmp/sneakvlc
+      - .:/app  # Mount source code for development
+    environment:
+      - VLC_PORT=12346
+      - SERVER_PORT=8080
+      - NODE_ENV=development
+    profiles:
+      - dev
+    command: ["./sneakvlc", "-port", "8080", "-host", "0.0.0.0"]
+
+networks:
+  default:
+    name: sneakvlc-network 

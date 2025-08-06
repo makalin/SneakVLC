@@ -1,0 +1,78 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build artifacts
+build/
+dist/
+bin/
+node_modules/
+
+# Test files
+test-files/
+*.test.zip
+*.test.mp4
+
+# Coverage reports
+coverage/
+*.coverage
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Makefile
+Makefile
+
+# Scripts (will be copied separately)
+scripts/
+
+# Received files
+received/
+
+# VLC cache
+vlc-cache/
+*.vlc
+
+# QR codes
+qr-codes/
+*.png
+*.jpg
+*.jpeg 
